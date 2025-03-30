@@ -47,19 +47,3 @@
 		<p style="display:block; text-align:center;">SPTV21 2025 a. &copy</p>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

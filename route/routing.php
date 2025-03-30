@@ -18,7 +18,7 @@ if ($path == '' OR $path == 'index' OR $path == 'index.php') {
     $response = Controller::InsertReview($_GET['review'], $_GET['id']);
 }
 
-//---------------- Регистрация пользователя
+//Регистрация пользователя
 elseif ($path == 'registerForm') { 
     $response = Controller::registerForm();
 } elseif ($path == 'registerAnswer') { 
@@ -31,17 +31,3 @@ else {
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
