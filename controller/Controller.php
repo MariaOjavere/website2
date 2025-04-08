@@ -1,5 +1,4 @@
 <?php
-include_once 'view/viewreviews.php';
 
 class Controller {
 

@@ -5,13 +5,13 @@ ob_start();
 <br>
 
 <?php
-ViewProducts::ReadProducts($n);
+ViewProducts::ReadProduct($n);
 
 echo "<br>";
-Controller::Comments($_GET['id']);
+Controller::Reviews($_GET['id']);
 
 echo "<br>";
-ViewComments::CommentsForm();
+ViewReviews::ReviewsForm();
 
 $content = ob_get_clean();
 include_once 'view/layout.php';

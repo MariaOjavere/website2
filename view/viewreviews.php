@@ -28,5 +28,12 @@ class ViewReviews {
         $count = $arr['count'] ?? 0;
         echo "<p><a href='#reviews'>Arvustuste arv: " . $count . "</a></p>";
     }
+    public static function ReviewsForm() {
+        echo '<form method="post" action="submit_review.php">';
+        echo '<label for="review">Kirjutage oma arvustus:</label><br>';
+        echo '<textarea id="review" name="review" rows="4" cols="50"></textarea><br>';
+        echo '<input type="esitama" value="esita Ülevaade">';
+        echo '</form>';
+    }
 }
 ?>

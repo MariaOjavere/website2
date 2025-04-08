@@ -3,11 +3,11 @@ session_start();
 include_once 'inc/Database.php';
 require 'model/Category.php';
 require 'model/Products.php';
-require 'model/Comments.php';
+require 'model/Reviews.php';
 require 'model/Register.php';
 
 include_once 'view/products.php';
-include_once 'view/comments.php';
+include_once 'view/reviews.php';
 
 
 

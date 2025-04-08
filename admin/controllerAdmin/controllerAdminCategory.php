@@ -14,33 +14,38 @@ class controllerAdminCategory{
 	
 	public static function categoryAddResult()
 	{
-		$test = modelAdminCategory::getCategoryAdd();	
+		$model = new modelAdminCategory();
+		$test = $model->getCategoryAdd();	
 		include_once('viewAdmin/categoryAddForm.php');
 	}
 	
 	public static function categoryEditForm($id)
 	{		
 		
-		$detail=modelAdminCategory::getCategoryDetail($id);
+		$model = new modelAdminCategory();
+		$detail = $model->getCategoryDetail($id);
 		include_once('viewAdmin/categoryEditForm.php');	
 	}
 	
 	public static function categoryEditResult($id)
 	{
-		$test = modelAdminCategory::getCategoryEdit($id);	
+		$model = new modelAdminCategory();
+		$test = $model->getCategoryEdit($id);	
 		include_once('viewAdmin/categoryEditForm.php');
 	}	
 	
 	public static function categoryDeleteForm($id)
 	{		
 		
-		$detail=modelAdminCategory::getCategoryDetail($id);
+		$model = new modelAdminCategory();
+		$detail = $model->getCategoryDetail($id);
 		include_once('viewAdmin/categoryDeleteForm.php');	
 	}
 	
 	public static function categoryDeleteResult($id)
 	{
-		$test = modelAdminCategory::getCategoryDelete($id);	
+		$model = new modelAdminCategory();
+		$test = $model->getCategoryDelete($id);	
 		include_once('viewAdmin/categoryDeleteForm.php');
 	}	
 	

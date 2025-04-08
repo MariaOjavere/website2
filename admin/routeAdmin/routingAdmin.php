@@ -17,11 +17,11 @@
 	}
 
 	elseif($path=='productsAdmin'){
-		$response=controllerAdminProducts::ProductList();
+		$response=controllerAdminProducts::ProductsList();
 		
 	} 
 		elseif($path=='productsAdd'){
-		$response=controllerAdminProduct::productsAddForm();
+		$response=controllerAdminProducts::productsAddForm();
 		
 	}
 	elseif($path == 'productsAddResult') {		
@@ -91,30 +91,4 @@ elseif($path == 'profileEditResult') {
 	$response=controllerAdmin::error404();	
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
