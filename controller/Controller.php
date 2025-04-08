@@ -1,4 +1,5 @@
 <?php
+include_once 'view/viewreviews.php';
 
 class Controller {
 
@@ -57,37 +58,14 @@ class Controller {
         self::ProductByID($id);
     }
     
-    public function registerForm() {        
+    public static function registerForm() {        
         include_once('view/formRegister.php');        
     }
 
-    public function registerUser() {
-        $result = Register::registerUser();
+    public static function registerUser() {
+        $register = new Register();
+        $result = $register->registerUser();
         include_once('view/answerRegister.php');    
     }
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

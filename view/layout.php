@@ -14,7 +14,7 @@
 			<li><a href="#">Kategooriad<i class="fa fa-angle-down"></i></a>
 			  <ul class="submenu">
 			  <?php                                
-                    Controller::AllProductCategories();                    
+                    Controller::AllCategory();                    
 				?>
 			  </ul>
 			</li>
@@ -44,6 +44,6 @@
 			</div>
 		</section>
 	<hr>
-		<p style="display:block; text-align:center;">SPTV21 2025 a. &copy</p>
+		<p style="display:block; text-align:center;">SPTV21 2025 a. ©</p>
 	</body>
 </html>
