@@ -1,5 +1,4 @@
 <?php
-include_once 'Database.php'; // Строка 2
 class Register {
     public function registerUser() {
         $controll = array(0 => false, 1 => 'Viga');

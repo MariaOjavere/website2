@@ -1,5 +1,4 @@
 <?php
-include_once 'Database.php'; // Строка 2
 class Category{
 	
 

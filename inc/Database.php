@@ -1,6 +1,6 @@
 <?php
 
-class database {
+class Database {
 
     private $conn;
     private $host;
@@ -13,7 +13,7 @@ class database {
         $this->host = 'localhost';
         $this->user = 'root';
         $this->password = '';
-        $this->baseName = 'signouDB';
+        $this->baseName = 'signoudb';
         $this->connect();
     }
 

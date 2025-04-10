@@ -1,5 +1,4 @@
 <?php
-include_once 'Database.php'; 
 class Products {
     
     public static function getLast10Products() {
