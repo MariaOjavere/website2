@@ -38,7 +38,7 @@ class Controller {
 
     public static function Reviews($productId) {
         $arr = Reviews::getReviewsByProductID($productId);
-        ViewReviews::ReviewsByProduct($arr);
+        ViewReviews::getReviewsByProduct($arr);
     }
     
     public static function ReviewsCount($productId) {

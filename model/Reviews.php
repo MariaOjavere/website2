@@ -13,10 +13,10 @@ class Reviews {
         return $arr;
     }
     
-    public static function insertComment($c, $id) {
+    public static function insertReview($c, $id) {
         $id = (int)$id;
         $c = htmlspecialchars($c);
-        $query = "INSERT INTO `reviews` (`user_id`, `product_id`, `text`, `date`) 
+        $query = "INSERT INTO `reviews` (`user_id`, `product_id`, `text`, `created_at`) 
                   VALUES ('2', '$id', '$c', CURRENT_TIMESTAMP)";
         $db = new Database();
         $q = $db->executeRun($query);

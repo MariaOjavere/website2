@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ?>
-<h1>TOP 10 TOOTED</h1>
+<h1>POPULARSED TOOTED</h1>
 <br>
 <?php
 foreach ($arr as $value) {
