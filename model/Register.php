@@ -44,5 +44,17 @@ class Register {
         
         return $controll;
     }
+    public function checkUser($username, $password) {
+        $db = new Database();
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':username' => $username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user && $user['password'] === $password) {
+            return $user;
+        }
+        return false;
+    }
 }
 ?>

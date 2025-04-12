@@ -35,5 +35,6 @@ class Products {
         $p = $db->getAll($query);
         return $p;
     }
+    
 }
 ?>

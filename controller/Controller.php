@@ -64,11 +64,34 @@ class Controller {
     public static function registerForm() {        
         include_once('view/formRegister.php');        
     }
-
     public static function registerUser() {
         $register = new Register();
         $result = $register->registerUser();
+        if ($result) {
+            session_start();
+            $_SESSION['user'] = $_POST['username'];
+        }
         include_once('view/answerRegister.php');    
     }
+    public static function loginForm() {
+        include_once('view/formLogin.php');
+    }
+    
+    public static function loginUser() {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $register = new Register();
+        $user = $register->checkUser($username, $password);
+        if ($user) {
+            session_start();
+            $_SESSION['user'] = $username;
+            header('Location: /'); // Перенаправляем на главную страницу
+            exit();
+        } else {
+            $error = "Vale kasutajanimi või parool!";
+            include_once('view/answerLogin.php');
+        }
+    }
+    
 }
 ?>

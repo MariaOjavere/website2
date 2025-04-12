@@ -42,6 +42,10 @@ class Database {
         }
     }
 
+    public function prepare($query) {
+        return $this->conn->prepare($query);
+    }
+
     function getOne($query) {
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -68,5 +72,6 @@ class Database {
         return $lastId;
     }
 }
+    
 
 ?>
