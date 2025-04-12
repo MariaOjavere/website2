@@ -49,7 +49,6 @@ class ViewProducts {
         $output .= '<p class="card-text"><strong>Hind:</strong> ' . htmlspecialchars($p['price']) . ' €</p>';
         $output .= '<p class="card-text"><strong>Laoseis:</strong> ' . htmlspecialchars($p['stock']) . '</p>';
         $output .= '<p class="card-text"><strong>Lisatud:</strong> ' . htmlspecialchars($p['created_at']) . '</p>';
-        $output .= '<a href="add_to_cart?id=' . $p['id'] . '" class="btn btn-primary">Lisa ostukorvi</a>';
         $output .= '</div>';
         $output .= '</div>';
         return $output;

@@ -24,7 +24,12 @@ class Controller {
     
     public static function ProductByID($id) {
         $p = Products::getProductByID($id);
-        include_once 'view/readproduct.php';
+        if ($p) {
+            $content = ViewProducts::ReadProduct($p);
+            include_once 'view/layout.php';
+        } else {
+            self::error404(); 
+        }
     }
     
     public static function SearchProducts($search) {
