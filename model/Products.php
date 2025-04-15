@@ -2,7 +2,7 @@
 class Products {
     
     public static function getLast10Products() {
-        $query = "SELECT * FROM products ORDER BY id DESC LIMIT 2" ;
+        $query = "SELECT * FROM products ORDER BY id DESC LIMIT 10" ;
         $db = new Database();
         $arr = $db->getAll($query);
         return $arr;

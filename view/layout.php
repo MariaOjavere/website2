@@ -6,14 +6,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Твои стили -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Стили -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <!-- Шрифт Noto Serif -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
     <!-- Навигация -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">

@@ -3,8 +3,10 @@ class Controller {
 
     public static function StartSite() {
         $arr = Products::getLast10Products();
+        ob_start();
         include_once 'view/start.php';
-        return;
+        $content = ob_get_clean();
+        include_once 'view/layout.php';
     }
 
     public static function AllCategory() {
@@ -85,7 +87,7 @@ class Controller {
         if ($user) {
             session_start();
             $_SESSION['user'] = $username;
-            header('Location: /'); // Перенаправляем на главную страницу
+            header('Location: /');
             exit();
         } else {
             $error = "Vale kasutajanimi või parool!";
