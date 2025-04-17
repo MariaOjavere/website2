@@ -33,10 +33,10 @@ ob_start();
         <p>Meie poest leiate alati uusimaid tehnoloogiaid ja lahendusi, mis vastavad kaasaegsetele nõuetele. Lisaks anname nõu, kuidas valida parim seade vastavalt teie vajadustele.</p>
         <div class="row">
             <div class="col-6 mb-3">
-                <img src="img/info1.png" class="img-fluid rounded" alt="Arvutid">
+                <img src="../img/info1.png" class="img-fluid rounded" alt="Arvutid">
             </div>
             <div class="col-6 mb-3">
-                <img src="img/info2.png" class="img-fluid rounded" alt="Võrguseadmed">
+                <img src="../img/info2.png" class="img-fluid rounded" alt="Võrguseadmed">
             </div>
         </div>
     </div>

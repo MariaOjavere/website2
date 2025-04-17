@@ -71,9 +71,11 @@ class Controller {
     public static function registerUser() {
         $register = new Register();
         $result = $register->registerUser();
-        if ($result) {
+        if ($result[0]) { // Проверяем $result[0], а не $result
             session_start();
-            $_SESSION['user'] = $_POST['username'];
+            $_SESSION['user'] = $_POST['name']; // Используем name, так как username в форме называется name
+            header('Location: /'); // Перенаправляем на главную страницу после успешной регистрации
+            exit();
         }
         include_once('view/answerRegister.php');    
     }

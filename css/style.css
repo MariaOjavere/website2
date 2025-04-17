@@ -1,39 +1,42 @@
+/* Общие стили страницы */
 body {
-    font-family: 'Noto Serif', serif;
-    background-color: #f5f5f5;
+    background-color: #f5f5f5; /* Резервный цвет фона */
     color: #333;
     margin: 0;
-    position: relative;
-    min-height: 100vh; /* Устанавливаем минимальную высоту на всю страницу */
+    min-height: 100vh;
+    font-family: 'Noto Serif', serif;
+    display: flex;
+    flex-direction: column;
 }
 
-body::before,
-body::after {
-    content: "";
-    position: fixed; /* Поменяем на fixed, чтобы фон был виден при прокрутке */
+/* Основной контент растягивается */
+section {
+    flex: 1 0 auto;
+}
+
+/* Боковые полосы с фоном */
+.side-background {
+    position: fixed;
     top: 0;
     bottom: 0;
     width: 300px;
-    background-color: red; /* Для теста */
     z-index: -1;
+    background-color: #a61c2b; /* Резервный цвет */
+    background-image: url('../img/side-background.jpg'); /* Относительный путь */
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-body::before {
+.side-background.left {
     left: 0;
+    background-position: left;
 }
 
-body::after {
+.side-background.right {
     right: 0;
+    background-position: right;
 }
-/* Убедимся, что центральный контейнер остается белым */
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative; /* Чтобы контейнер был выше псевдоэлементов */
-    z-index: 1; /* Помещаем контейнер поверх фона */
-}
+
 /* Навигационная панель */
 .navbar {
     background-color: #a61c2b !important;
@@ -46,6 +49,12 @@ body::after {
 
 .nav-link:hover {
     color: #ddd !important;
+}
+
+/* Стили для логотипа */
+.navbar-logo {
+    height: 40px; /* Настройте высоту логотипа по желанию */
+    width: auto;
 }
 
 /* Выпадающее меню */
@@ -93,6 +102,8 @@ body::after {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 /* Карусель баннеров */
@@ -100,11 +111,14 @@ body::after {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .carousel#promoCarousel .carousel-item img {
     max-height: 400px;
     object-fit: cover;
+    width: 100%;
 }
 
 .carousel#promoCarousel .carousel-caption {
@@ -124,6 +138,13 @@ body::after {
     font-size: 1.2rem;
 }
 
+/* Убираем стрелки на баннере */
+.carousel#promoCarousel .carousel-control-prev,
+.carousel#promoCarousel .carousel-control-next {
+    display: none !important;
+}
+
+/* Индикаторы карусели */
 .carousel#promoCarousel .carousel-indicators {
     bottom: 10px;
 }
@@ -139,18 +160,6 @@ body::after {
 
 .carousel#promoCarousel .carousel-indicators .active {
     background-color: #a61c2b;
-}
-
-.carousel#promoCarousel .carousel-control-prev-icon,
-.carousel#promoCarousel .carousel-control-next-icon {
-    background-color: #a61c2b;
-    border-radius: 50%;
-    padding: 20px;
-}
-
-.carousel#promoCarousel .carousel-control-prev,
-.carousel#promoCarousel .carousel-control-next {
-    width: 5%;
 }
 
 /* Карусель товаров */
@@ -221,65 +230,16 @@ body::after {
     color: #fff !important;
 }
 
-/* Ссылки */
-.text-center a {
-    color: #a61c2b;
-    text-decoration: none;
-}
-
-.text-center a:hover {
-    color: #8b1623;
-    text-decoration: underline;
-}
-
 /* Подвал */
 footer {
     background-color: #f5f5f5 !important;
     color: #333;
     border-top: 1px solid #ddd;
+    flex-shrink: 0;
+    width: 100%;
 }
 
 /* Заголовки */
 h1, h2, h3 {
     color: #1a1a1a;
-}
-.carousel-control-prev,
-.carousel-control-next {
-    background-color: #C8102E; /* Красный фон */
-    border-radius: 50%; /* Делаем кнопки круглыми, если нужно */
-    width: 40px;
-    height: 40px;
-    opacity: 0.8; /* Легкая прозрачность */
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    opacity: 1; /* Полная непрозрачность при наведении */
-}
-
-/* Стили для иконок внутри кнопок */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-image: none; /* Убираем стандартную иконку */
-    width: 20px;
-    height: 20px;
-}
-
-/* Кастомные стрелки */
-.carousel-control-prev-icon::before,
-.carousel-control-next-icon::before {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.carousel-control-prev-icon::before {
-    content: "◄"; /* Стрелка влево */
-}
-
-.carousel-control-next-icon::before {
-    content: "►"; /* Стрелка вправо */
 }
