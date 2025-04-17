@@ -5,9 +5,7 @@ ob_start();
 <br>
 
 <?php
-
-ViewProducts::ProductsByCategory($arr);
+echo ViewProducts::ProductsByCategory($arr); // Добавляем echo для вывода результата
 $content = ob_get_clean();
 include_once 'view/layout.php';
-
 ?>

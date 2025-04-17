@@ -13,7 +13,9 @@ class Controller {
         $arr = Category::getAllCategory();
         include_once 'view/category.php';
     }
-    
+    public static function InfoPage() {
+        include 'view/info.php';
+    }
     public static function AllProducts() {
         $arr = Products::getAllProducts();
         include_once 'view/allproducts.php';

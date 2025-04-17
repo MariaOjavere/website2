@@ -34,7 +34,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="iwww">Info</a>
+                        <a class="nav-link" href="info">Info</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./">Avaleht</a>

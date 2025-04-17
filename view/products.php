@@ -37,6 +37,7 @@ class ViewProducts {
         $output .= '</div>';
         return $output;
     }
+
     public static function ReadProduct($p) {
         // Начинаем сессию, если она еще не начата
         if (session_status() === PHP_SESSION_NONE) {
@@ -53,7 +54,19 @@ class ViewProducts {
         $output .= '<p class="card-text"><strong>Hind:</strong> ' . htmlspecialchars($p['price']) . ' €</p>';
         $output .= '<p class="card-text"><strong>Laoseis:</strong> ' . htmlspecialchars($p['stock']) . '</p>';
         $output .= '<p class="card-text"><strong>Lisatud:</strong> ' . htmlspecialchars($p['created_at']) . '</p>';
-    
+
+        // Отображение характеристик
+        if (!empty($p['specs'])) {
+            $output .= '<h3 class="mt-4">Spetsifikatsioonid</h3>';
+            $output .= '<ul class="product-specs">';
+            foreach ($p['specs'] as $spec) {
+                $output .= '<li><strong>' . htmlspecialchars($spec['spec_name']) . ':</strong> ' . htmlspecialchars($spec['spec_value']) . '</li>';
+            }
+            $output .= '</ul>';
+        } else {
+            $output .= '<p class="mt-4">Spetsifikatsioone pole saadaval.</p>';
+        }
+
         $output .= '<h3 class="mt-4">Arvustused</h3>';
         $reviews = Reviews::getReviewsByProductID($p['id']);
         if ($reviews) {
@@ -83,6 +96,5 @@ class ViewProducts {
         $output .= '</div>';
         return $output;
     }
-    
 }
 ?>

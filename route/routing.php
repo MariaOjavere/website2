@@ -13,18 +13,23 @@ if ($path == '' OR $path == 'index' OR $path == 'index.php') {
     $response = Controller::ProductByID($_GET['id']);
 } elseif ($path == 'search' and isset($_GET['otsi'])) {
     $response = Controller::SearchProducts($_GET['otsi']);
-} elseif ($path == 'insertreview' and isset($_GET['review'], $_GET['id'])) {
-    $response = Controller::InsertReview($_GET['review'], $_GET['id']);
-}
-
-elseif ($path == 'registerForm') { 
+} elseif ($path == 'insertreview' and isset($_POST['comment'], $_POST['product_id'])) {
+    $review = [
+        'username' => $_POST['username'],
+        'comment' => $_POST['comment']
+    ];
+    $response = Controller::InsertReview($review, $_POST['product_id']);
+} elseif ($path == 'registerForm') { 
     $response = Controller::registerForm();
 } elseif ($path == 'registerAnswer') { 
     $response = Controller::registerUser();
-}
-
-else {
+} elseif ($path == 'loginForm') { 
+    $response = Controller::loginForm();
+} elseif ($path == 'loginAnswer') { 
+    $response = Controller::loginUser();
+} elseif ($path == 'info') { 
+    $response = Controller::InfoPage(); // Новый маршрут для info
+} else {
     $response = Controller::error404();
 }
-
 ?>
