@@ -39,12 +39,11 @@ class ViewProducts {
     }
 
     public static function ReadProduct($p) {
-        // Начинаем сессию, если она еще не начата
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
     
-        $output = '<div class="card">';
+        $output = '<div class="card product-page">';
         if (!empty($p['picture'])) {
             $output .= '<img src="data:image/jpeg;base64,' . base64_encode($p['picture']) . '" class="card-img-top" alt="' . htmlspecialchars($p['name']) . '">';
         }
@@ -55,7 +54,6 @@ class ViewProducts {
         $output .= '<p class="card-text"><strong>Laoseis:</strong> ' . htmlspecialchars($p['stock']) . '</p>';
         $output .= '<p class="card-text"><strong>Lisatud:</strong> ' . htmlspecialchars($p['created_at']) . '</p>';
 
-        // Отображение характеристик
         if (!empty($p['specs'])) {
             $output .= '<h3 class="mt-4">Spetsifikatsioonid</h3>';
             $output .= '<ul class="product-specs">';
@@ -74,8 +72,7 @@ class ViewProducts {
         } else {
             $output .= '<p>Arvustusi veel pole.</p>';
         }
-    
-        // Проверяем, зарегистрирован ли пользователь
+
         if (isset($_SESSION['user'])) {
             $output .= '<h4 class="mt-4">Jäta arvustus</h4>';
             $output .= '<form action="insertreview" method="POST">';
@@ -88,7 +85,6 @@ class ViewProducts {
             $output .= '<button type="submit" class="btn btn-primary">Saada</button>';
             $output .= '</form>';
         } else {
-            // Обновляем ссылки в соответствии с маршрутами
             $output .= '<p class="mt-4">Arvustuse jätmiseks <a href="registerForm">registreeru</a> või <a href="loginForm">logi sisse</a>.</p>';
         }
     

@@ -2,25 +2,17 @@
 ob_start();
 ?>
 
-<br>
+<div class="container my-5">
+    <?php
+    if (isset($p) && !empty($p)) {
+        echo ViewProducts::ReadProduct($p);
+    } else {
+        echo '<p>Toodet ei leitud</p>';
+    }
+    ?>
+</div>
 
 <?php
-ViewProducts::ReadProduct($p);
-
-echo "<br>";
-Controller::Reviews($_GET['id']);
-
-echo "<br>";
-ViewReviews::ReviewsForm();
-
 $content = ob_get_clean();
-
-if (isset($p) && !empty($p)) {
-    echo $p['name'];
-    echo $p['price'];
-    echo $p['description'];
-} else {
-    echo "Toodet ei leitud";
-}
-
+include_once 'layout.php';
 ?>
