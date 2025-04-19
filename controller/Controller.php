@@ -13,9 +13,11 @@ class Controller {
         $arr = Category::getAllCategory();
         include_once 'view/category.php';
     }
+
     public static function InfoPage() {
         include 'view/info.php';
     }
+
     public static function AllProducts() {
         $arr = Products::getAllProducts();
         include_once 'view/allproducts.php';
@@ -44,11 +46,6 @@ class Controller {
     public static function error404() {
         include_once 'view/error404.php';
     }
-
-    public static function Reviews($productId) {
-        $arr = Reviews::getReviewsByProductID($productId);
-        ViewReviews::getReviewsByProduct($arr);
-    }
     
     public static function ReviewsCount($productId) {
         $arr = Reviews::getReviewsCountByProductID($productId);
@@ -60,25 +57,32 @@ class Controller {
         ViewReviews::ReviewsCountWithAnchor($arr);
     }
     
-    public static function InsertReview($review, $id) {
-        Reviews::InsertReview($review, $id);
-        self::ProductByID($id);
+    public static function InsertReview($comment, $id, $username) {
+        try {
+            Reviews::insertReview($comment, $id, $username);
+            self::ProductByID($id);
+        } catch (Exception $e) {
+            $content = '<div class="alert alert-danger">' . htmlspecialchars($e->getMessage()) . '</div>';
+            include_once 'view/layout.php';
+        }
     }
     
     public static function registerForm() {        
         include_once('view/formRegister.php');        
     }
+
     public static function registerUser() {
         $register = new Register();
         $result = $register->registerUser();
-        if ($result[0]) { // Проверяем $result[0], а не $result
+        if ($result[0]) {
             session_start();
-            $_SESSION['user'] = $_POST['name']; // Используем name, так как username в форме называется name
-            header('Location: /'); // Перенаправляем на главную страницу после успешной регистрации
+            $_SESSION['user'] = $_POST['name'];
+            header('Location: /');
             exit();
         }
         include_once('view/answerRegister.php');    
     }
+
     public static function loginForm() {
         include_once('view/formLogin.php');
     }
@@ -98,6 +102,5 @@ class Controller {
             include_once('view/answerLogin.php');
         }
     }
-    
 }
 ?>

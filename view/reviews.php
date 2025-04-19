@@ -2,38 +2,42 @@
 class ViewReviews {
     public static function getReviewsByProduct($arr) {
         if (empty($arr)) {
-            echo "<p>Kommentaarid puuduvad.</p>";
-            return;
+            return "<p>Kommentaarid puuduvad.</p>";
         }
 
-        echo "<h3>Ülevaadet:</h3>";
-        echo "<ul>";
+        $output = '<div id="reviews">';
+        $output .= "<h3>Ülevaadet:</h3>";
+        $output .= "<ul>";
         foreach ($arr as $review) {
-            echo "<li>";
-            echo "<strong>Kasutaja:</strong> " . htmlspecialchars($review['user_name']) . "<br>";
-            echo "<strong>Ülevaade:</strong> " . htmlspecialchars($review['text']) . "<br>";
-            echo "<strong>Kuupäev:</strong> " . htmlspecialchars($review['date']) . "<br>";
-            echo "</li><hr>";
+            $output .= "<li>";
+            $output .= "<strong>Kasutaja:</strong> " . htmlspecialchars($review['user_name'] ?? 'Tundmatu kasutaja') . "<br>";
+            $output .= "<strong>Ülevaade:</strong> " . htmlspecialchars($review['text'] ?? 'Puudub') . "<br>";
+            $output .= "<strong>Kuupäev:</strong> " . htmlspecialchars($review['created_at'] ?? 'Kuupäev puudub') . "<br>";
+            $output .= "</li><hr>";
         }
-        echo "</ul>";
+        $output .= "</ul>";
+        $output .= "</div>";
+        return $output;
     }
 
     public static function ReviewsCount($arr) {
         $count = $arr['count'] ?? 0;
-        echo "<p>Arvustuste arv: " . $count . "</p>";
+        return "<p>Arvustuste arv: " . $count . "</p>";
     }
 
     public static function ReviewsCountWithAnchor($arr) {
         $count = $arr['count'] ?? 0;
-        echo "<p><a href='#reviews'>Arvustuste arv: " . $count . "</a></p>";
+        return "<p><a href='#reviews'>Arvustuste arv: " . $count . "</a></p>";
     }
 
-    public static function ReviewsForm() {
-        echo '<form method="post" action="submit_review.php">';
-        echo '<label for="review">Kirjutage oma arvustus:</label><br>';
-        echo '<textarea id="review" name="review" rows="4" cols="50"></textarea><br>';
-        echo '<input type="submit" value="Esita Ülevaade">';
-        echo '</form>';
+    public static function ReviewsForm($product_id) {
+        $output = '<form method="post" action="submit_review.php">';
+        $output .= '<input type="hidden" name="product_id" value="' . htmlspecialchars($product_id) . '">';
+        $output .= '<label for="review">Kirjutage oma arvustus:</label><br>';
+        $output .= '<textarea id="review" name="review" rows="4" cols="50"></textarea><br>';
+        $output .= '<input type="submit" value="Esita Ülevaade">';
+        $output .= '</form>';
+        return $output;
     }
 }
 ?>

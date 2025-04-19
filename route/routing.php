@@ -14,11 +14,7 @@ if ($path == '' OR $path == 'index' OR $path == 'index.php') {
 } elseif ($path == 'search' and isset($_GET['otsi'])) {
     $response = Controller::SearchProducts($_GET['otsi']);
 } elseif ($path == 'insertreview' and isset($_POST['comment'], $_POST['product_id'])) {
-    $review = [
-        'username' => $_POST['username'],
-        'comment' => $_POST['comment']
-    ];
-    $response = Controller::InsertReview($review, $_POST['product_id']);
+    $response = Controller::InsertReview($_POST['comment'], $_POST['product_id'], $_POST['username']);
 } elseif ($path == 'registerForm') { 
     $response = Controller::registerForm();
 } elseif ($path == 'registerAnswer') { 
@@ -28,7 +24,7 @@ if ($path == '' OR $path == 'index' OR $path == 'index.php') {
 } elseif ($path == 'loginAnswer') { 
     $response = Controller::loginUser();
 } elseif ($path == 'info') { 
-    $response = Controller::InfoPage(); // Новый маршрут для info
+    $response = Controller::InfoPage();
 } else {
     $response = Controller::error404();
 }

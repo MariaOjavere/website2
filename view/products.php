@@ -65,14 +65,6 @@ class ViewProducts {
             $output .= '<p class="mt-4">Spetsifikatsioone pole saadaval.</p>';
         }
 
-        $output .= '<h3 class="mt-4">Arvustused</h3>';
-        $reviews = Reviews::getReviewsByProductID($p['id']);
-        if ($reviews) {
-            $output .= ViewReviews::getReviewsByProduct($reviews); 
-        } else {
-            $output .= '<p>Arvustusi veel pole.</p>';
-        }
-
         if (isset($_SESSION['user'])) {
             $output .= '<h4 class="mt-4">Jäta arvustus</h4>';
             $output .= '<form action="insertreview" method="POST">';
@@ -84,10 +76,16 @@ class ViewProducts {
             $output .= '</div>';
             $output .= '<button type="submit" class="btn btn-primary">Saada</button>';
             $output .= '</form>';
-        } else {
-            $output .= '<p class="mt-4">Arvustuse jätmiseks <a href="registerForm">registreeru</a> või <a href="loginForm">logi sisse</a>.</p>';
         }
-    
+
+        $output .= '<h3 class="mt-4">Arvustused</h3>';
+        $reviews = Reviews::getReviewsByProductID($p['id']);
+        if ($reviews) {
+            $output .= ViewReviews::getReviewsByProduct($reviews); 
+        } else {
+            $output .= '<p>Arvustusi veel pole.</p>';
+        }
+
         $output .= '</div>';
         $output .= '</div>';
         return $output;

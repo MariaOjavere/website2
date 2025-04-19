@@ -1,5 +1,4 @@
 <?php
-
 class Reviews {
     public static function getReviewsByProductID($id) {
         $id = (int)$id;
@@ -13,12 +12,29 @@ class Reviews {
         return $arr;
     }
     
-    public static function insertReview($c, $id) {
+    public static function insertReview($comment, $id, $username) {
         $id = (int)$id;
-        $c = htmlspecialchars($c);
-        $query = "INSERT INTO `reviews` (`user_id`, `product_id`, `text`, `created_at`) 
-                  VALUES ('2', '$id', '$c', CURRENT_TIMESTAMP)";
+        $comment = htmlspecialchars($comment);
+        $username = htmlspecialchars($username);
+
         $db = new Database();
+        $query = "SELECT id FROM users WHERE username = '$username'";
+        $user = $db->getOne($query);
+        
+        if ($user) {
+            $user_id = (int)$user['id'];
+        } else {
+            $user_id = 2;
+        }
+
+        $query = "SELECT id FROM reviews WHERE user_id = '$user_id' AND product_id = '$id' AND text = '$comment'";
+        $existingReview = $db->getOne($query);
+        if ($existingReview) {
+            return false; 
+        }
+
+        $query = "INSERT INTO `reviews` (`user_id`, `product_id`, `text`, `created_at`) 
+                  VALUES ('$user_id', '$id', '$comment', CURRENT_TIMESTAMP)";
         $q = $db->executeRun($query);
         return $q;
     }
