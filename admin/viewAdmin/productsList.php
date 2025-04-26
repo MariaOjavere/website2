@@ -1,41 +1,52 @@
-<?php ob_start() ?>
-
-<h2>Products List </h2>
-
+<?php ob_start(); ?>
 <div class="container" style="min-height:400px;">
-	<div style="margin:20px;">
-		<a class="btn btn-primary" href="productsAdd" role="button">Добавить продукт</a>
-	</div>
-	<div class="col-md-11">		
-		<table class='table table-bordered table-responsive'>
-			<tr>
-				<th width="10%">ID</th>
-				<th width="70%">Header Products</th>
-				<th width="20%"></th>
-			</tr>
-		<?php
-		
-		foreach($arr as $row){
-		echo '<tr>';
-		
-			echo '<td>'.$row['id'].'</td>	';
-			
-			echo '<td><b>Title:</b> '.$row['title'].'<br>';
-			echo '<b>Категория: </b><i>'.$row['name'].'</i>';
-			echo '<br><b>Author: </b><i>'.$row['username'].'</i>';
-			echo '</td>';
-			echo '<td>
-			<a href="productsEdit?id='.$row['id'].'">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-			<a href="productsDel?id='.$row['id'].'">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-			</td>	';
-		
-		echo '</tr>';
-		}
-		
-		?>
-		</table>  			
-	</div>			
+<div class="col-md-11">    
+    <h2>Products List</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Specifications</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $db = new Database();
+            foreach ($arr as $row): 
+                $specs = $db->getAll("SELECT * FROM product_specs WHERE product_id = ?", [$row['id']]);
+            ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['description']); ?></td>
+                    <td><?php echo htmlspecialchars($row['category_name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['price']); ?></td>
+                    <td><?php echo htmlspecialchars($row['stock']); ?></td>
+                    <td>
+                        <?php 
+                        if ($specs) {
+                            foreach ($specs as $spec) {
+                                echo htmlspecialchars($spec['spec_name']) . ': ' . htmlspecialchars($spec['spec_value']) . '<br>';
+                            }
+                        } else {
+                            echo 'No specifications';
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <a href="productsEdit?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
+                        <a href="productsDelete?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <a href="productsAdd" class="btn btn-success">Add Product</a>
+</div>
 </div>
 <?php $content = ob_get_clean(); ?>
-
-<?php include "viewAdmin/templates/layout.php"; ?>
+<?php include "templates/layout.php"; ?>

@@ -1,85 +1,52 @@
 <?php ob_start(); ?>
- 
 <div class="container" style="min-height:400px;">
-<div class="col-md-11">	 
- <h2>Products Edit </h2>
- <?php 
- if(isset($test)){
-	if($test==true)
-		{
-?>
-	<div class="alert alert-info">
-		<strong>Запись изменена. </strong><a href="productsAdmin"> Список продуктов</a>
-	</div>
-	<?php
-		}
-    else if($test==false)
-    {
-     ?>
-		<div class="alert alert-warning">
-			<strong>Ошибка изменения записи!</strong> <a href="productsAdmin"> Список продуктов</a>
-		</div>
-     <?php
-        }	
- }
- else{
-	?>
-	
-  <form method='POST' action="productsEditResult?id=<?php echo $id; ?>" enctype="multipart/form-data">
-    <table class='table table-bordered'>
-        <tr>
-            <td>Products title</td>
-            <td><input type='text' name='title' class='form-control' required 
-			value="<?php echo $detail['title'];?>" ></td>
-        </tr>
-        <tr>
-            <td>Products text</td>
-            <td><textarea rows="5" name="text" class='form-control' required ><?php  echo $detail['text']; ?></textarea></td>
-        </tr>
-		<tr>
-            <td>Category</td>
-            <td>
-			    <select name="idCategory" class="form-control" >
-                    <?php
-                        foreach($arr as $row){							
-						echo '<option value="'.$row['id'].'"';
-							if($row['id']==$detail['category_id']) echo 'selected';
-						echo '>'.$row['name'].'</option>';
-						}
-                    ?>    
-                </select>
-			</td>
-        </tr>
-		<!--  image-->	
-		<tr>
-            <td>OldPicture</td>
-            <td><div>
-			<!--<img src="../images/<?php  //echo $detail['picture']; ?>" width=150>-->	
-			<?php echo '<img src="data:image/jpeg;base64,'.base64_encode( $detail['picture'] ).'" width=150 />';?>          
-            </div></td>
-        </tr>
-        <tr>
-            <td>Picture</td>
-            <td><div>
-                <input type=file name="picture" style="color:black;">
-            </div></td>
-        </tr>	
-		<!--  end  image-->			
-        <tr>
-            <td colspan="2">
-                <button type="submit" class="btn btn-primary" name="save">
-                    <span class="glyphicon glyphicon-plus"></span> Изменить
-                </button>  
-                <a href="productsAdmin" class="btn btn-large btn-success">
-                <i class="glyphicon glyphicon-backward"></i> &nbsp;Назад к списку</a>
-            </td>
-        </tr>
-    </table>
-</form> 
-<?php
-}
-?>
-	</div>			
+<div class="col-md-11">    
+    <h2>Products Edit</h2>
+    <?php if (isset($_SESSION['errorString'])): ?>
+        <div class="alert alert-danger">
+            <?php echo htmlspecialchars($_SESSION['errorString']); ?>
+        </div>
+        <?php unset($_SESSION['errorString']); ?>
+    <?php endif; ?>
+    
+    <form method="post" action="/productsEditResult?id=<?php echo htmlspecialchars($product['id']); ?>" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Products Name</label>
+            <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
+        </div>
+        <div class="form-group">
+            <label>Products Description</label>
+            <textarea name="description" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <select name="category_id" class="form-control">
+                <?php
+                $categories = controllerAdminCategory::getCategoryList();
+                foreach($categories as $row) {
+                    $selected = $row['id'] == $product['category_id'] ? 'selected' : '';
+                    echo '<option value="' . htmlspecialchars($row['id']) . '" ' . $selected . '>' . htmlspecialchars($row['name']) . '</option>';
+                }
+                ?>    
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Picture</label>
+            <input type="file" name="picture" class="form-control">
+            <p>Current picture: <?php echo $product['picture'] ? '(Image exists)' : 'None'; ?></p>
+        </div>
+        <div class="form-group">
+            <label>Stock</label>
+            <input type="number" name="stock" class="form-control" value="<?php echo htmlspecialchars($product['stock']); ?>" required>
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" name="price" class="form-control" step="0.01" min="0" value="<?php echo htmlspecialchars($product['price']); ?>" required>
+        </div>
+        <button type="submit" name="btnEditProduct" class="btn btn-primary">Save</button>
+        <a href="/productsAdmin" class="btn btn-default">Back to List</a>
+    </form>
+</div>
 </div>
 <?php $content = ob_get_clean(); ?>
-<?php include "viewAdmin/templates/layout.php"; ?>
+<?php include "templates/layout.php"; ?>

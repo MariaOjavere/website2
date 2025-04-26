@@ -88,17 +88,41 @@ class Controller {
     }
     
     public static function loginUser() {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $register = new Register();
-        $user = $register->checkUser($username, $password);
-        if ($user) {
-            session_start();
-            $_SESSION['user'] = $username;
-            header('Location: /');
-            exit();
+        $error = '';
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            error_log("User login attempt: username = $username");
+    
+            $register = new Register();
+            $user = $register->checkUser($username, $password);
+            if ($user) {
+                error_log("User found: id = " . $user['id'] . ", status = " . $user['status']);
+                $_SESSION['userId'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['status'] = $user['status'];
+                $_SESSION['sessionID'] = session_id();
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['is_admin'] = ($user['status'] === 'admin');
+                $_SESSION['user'] = $user['username']; // Для совместимости с текущей логикой
+                error_log("Login successful: userId = " . $user['id'] . ", status = " . $user['status']);
+    
+                // Перенаправляем в зависимости от статуса
+                if ($user['status'] === 'admin') {
+                    header('Location: /admin/productsAdmin');
+                    exit();
+                } else {
+                    header('Location: /');
+                    exit();
+                }
+            } else {
+                error_log("Login failed for username: $username");
+                $error = "Vale kasutajanimi või parool!";
+                include_once('view/answerLogin.php');
+            }
         } else {
-            $error = "Vale kasutajanimi või parool!";
+            error_log("Username or password not provided");
+            $error = "Palun sisestage kasutajanimi ja parool!";
             include_once('view/answerLogin.php');
         }
     }

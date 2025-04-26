@@ -1,66 +1,55 @@
 <?php
-class modelAdminCategory{
+class modelAdminCategory {
+    public static function getCategoryList() {
+        $sql = 'SELECT * FROM category ORDER BY name ASC';
+        $db = new Database();
+        return $db->getAll($sql);
+    }
 
-public static function getCategoryList(){
-	$sql = "SELECT * FROM category ORDER BY category.name ASC";
-		$db = new Database();
-        $rows = $db->getAll($sql);
-        return $rows;
-	
-}	
+    public static function getCategoryAdd() {
+        $test = array(false, "Error adding category");
+        if (isset($_POST['btnAddCategory'])) {
+            $name = $_POST['name'] ?? '';
+            if ($name) {
+                $sql = "INSERT INTO category (name) VALUES (?)";
+                $db = new Database();
+                $stmt = $db->prepare($sql);
+                $result = $stmt->execute([$name]);
+                if ($result) {
+                    $test = array(true, "Category added successfully");
+                }
+            }
+        }
+        return $test;
+    }
 
-public function getCategoryDetail($id){
-	$sql = "SELECT * FROM `category` WHERE `id`=".$id;
-		$db = new Database();
-        $row = $db->getOne($sql);
-        return $row;	
-}	
-public function getCategoryAdd(){
-	$test=false;
-		if(isset($_POST['save'])){				
-			if(isset($_POST['name'])  ){
-			$category = $_POST['name'];	
-			$sql="INSERT INTO `category` (`id`, `name`) VALUES (NULL, '$category')";
-			$db = new Database();
-			$item = $db->executeRun($sql);	
-			if($item) $test=true;
-			}
-		}		
-	return $test;
-}
+    public static function getCategoryEdit($id) {
+        $sql = 'SELECT * FROM category WHERE id = ?';
+        $db = new Database();
+        return $db->getOne($sql, [$id]);
+    }
 
-public function getCategoryEdit($id)
-{
-	$test=false;
-		if(isset($_POST['save']))
-		{				
-			if(isset($_POST['name'])  ){
-			$category = $_POST['name'];		
-			$sql="UPDATE `category` SET `name` = '$category' WHERE `category`.`id` = ".$id;
-			$db = new Database();
-			$item = $db->executeRun($sql);				
-			if($item) $test=true;
-			}
-		}	
-return $test;		
-	
-}
-public function getCategoryDelete($id)
-{
-	$test=false;
-		if(isset($_POST['save']))
-		{					
-			$sql="DELETE FROM `category` WHERE `category`.`id` =".$id;
-			$db = new Database();
-			$item = $db->executeRun($sql);				
-			if($item) $test=true;
-			
-		}	
-return $test;		
-	
-}
+    public static function getCategoryEditResult($id) {
+        $test = array(false, "Error editing category");
+        if (isset($_POST['btnEditCategory'])) {
+            $name = $_POST['name'] ?? '';
+            if ($name) {
+                $sql = "UPDATE category SET name = ? WHERE id = ?";
+                $db = new Database();
+                $stmt = $db->prepare($sql);
+                $result = $stmt->execute([$name, $id]);
+                if ($result) {
+                    $test = array(true, "Category updated successfully");
+                }
+            }
+        }
+        return $test;
+    }
 
-
-
+    public static function getCategoryDelete($id) {
+        $sql = 'DELETE FROM category WHERE id = ?';
+        $db = new Database();
+        $db->executeRun($sql, [$id]);
+    }
 }
 ?>

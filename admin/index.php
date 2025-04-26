@@ -11,5 +11,13 @@ include_once("controllerAdmin/controllerAdminProducts.php");
 include_once("controllerAdmin/controllerAdminCategory.php");
 
 include_once("routeAdmin/routingAdmin.php");
+?>
 
-echo $response;
+    <?php 
+    if (isset($content)) {
+        echo $content;
+    } else {
+        echo "<p>Error: Content not loaded.</p>";
+    }
+    ?>
+?>

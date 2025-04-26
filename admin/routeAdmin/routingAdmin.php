@@ -1,94 +1,60 @@
 <?php
-	$host = explode('?', $_SERVER['REQUEST_URI'])[0];
-	$num = substr_count($host, '/');
-	$path = explode('/', $host)[$num];
-	
-	if($path=="" OR $path=="index"){
-		$response=controllerAdmin::formLoginSite();
-		
-	}
-	
-	elseIf($path=='login'){
-		$response=controllerAdmin::loginAction();
-	}
-	
-		elseIf($path=='logout'){
-		$response=controllerAdmin::logoutAction();
-	}
+$host = explode('?', $_SERVER['REQUEST_URI'])[0];
+$num = substr_count($host, '/');
+$path = explode('/', $host)[$num];
 
-	elseif($path=='productsAdmin'){
-		$response=controllerAdminProducts::ProductsList();
-		
-	} 
-		elseif($path=='productsAdd'){
-		$response=controllerAdminProducts::productsAddForm();
-		
-	}
-	elseif($path == 'productsAddResult') {		
-	$response = controllerAdminProducts::productsAddResult();	
+if ($path == '' || $path == 'index' || $path == 'index.php') {
+    controllerAdmin::formLoginSite();
 }
-
-		elseif($path=='productsEdit' && isset($_GET['id'])){
-		$response=controllerAdminProducts::productsEditForm($_GET['id']);
-		
-	}
-	elseif($path == 'productsEditResult' && isset($_GET['id'])) {		
-	$response = controllerAdminProducts::productsEditResult($_GET['id']);	
+elseif ($path == 'login') {
+    controllerAdmin::loginAction();
 }
-
-	elseif($path=='productsDel' && isset($_GET['id'])){
-		$response=controllerAdminProducts::productsDeleteForm($_GET['id']);
-		
-	}
-	elseif($path == 'productsDelResult' && isset($_GET['id'])) {		
-		$response = controllerAdminProducts::productsDeleteResult($_GET['id']);	
-	}
-
-	elseif($path=='categoryAdmin'){
-		$response=controllerAdminCategory::CategoryList();
-		
-	}
-		elseif($path=='categoryAdd'){
-		$response=controllerAdminCategory::categoryAddForm();
-		
-	}
-	elseif($path == 'categoryAddResult') {		
-	$response = controllerAdminCategory::categoryAddResult();	
+elseif ($path == 'logout') {
+    controllerAdmin::logoutAction();
 }
-		elseif($path=='categoryEdit' && isset($_GET['id'])){
-		$response=controllerAdminCategory::categoryEditForm($_GET['id']);
-		
-	}
-	elseif($path == 'categoryEditResult' && isset($_GET['id'])) {		
-	$response = controllerAdminCategory::categoryEditResult($_GET['id']);	
+elseif ($path == 'productsAdmin') {
+    controllerAdminProducts::productsList();
 }
-
-	elseif($path=='categoryDel' && isset($_GET['id'])){
-		$response=controllerAdminCategory::categoryDeleteForm($_GET['id']);
-		
-	}
-	elseif($path == 'categoryDelResult' && isset($_GET['id'])) {		
-		$response = controllerAdminCategory::categoryDeleteResult($_GET['id']);	
-	}
-
-elseif($path == 'profile') {	
-	$response = ControllerAdmin::profileTable();
+elseif ($path == 'productsAdd') {
+    controllerAdminProducts::productsAdd();
 }
-
-elseif($path == 'profileEdit') {	
-	
-	$response = ControllerAdmin::profileEditForm();		
-	
+elseif ($path == 'productsAddResult') {
+    controllerAdminProducts::productsAddResult();
 }
-elseif($path == 'profileEditResult') {	
-			
-	$response = ControllerAdmin::profileEditResult();		
-	
+elseif ($path == 'productsEdit' && isset($_GET['id'])) {
+    controllerAdminProducts::productsEdit($_GET['id']);
 }
-
-	else{
-		
-	$response=controllerAdmin::error404();	
-		
-	}
-	
+elseif ($path == 'productsEditResult' && isset($_GET['id'])) {
+    controllerAdminProducts::productsEditResult($_GET['id']);
+}
+elseif ($path == 'productsDelete' && isset($_GET['id'])) {
+    controllerAdminProducts::productsDelete($_GET['id']);
+}
+elseif ($path == 'categoryAdmin') {
+    controllerAdminCategory::categoryList();
+}
+elseif ($path == 'categoryAdd') {
+    controllerAdminCategory::categoryAdd();
+}
+elseif ($path == 'categoryAddResult') {
+    controllerAdminCategory::categoryAddResult();
+}
+elseif ($path == 'categoryEdit' && isset($_GET['id'])) {
+    controllerAdminCategory::categoryEdit($_GET['id']);
+}
+elseif ($path == 'categoryEditResult' && isset($_GET['id'])) {
+    controllerAdminCategory::categoryEditResult($_GET['id']);
+}
+elseif ($path == 'categoryDelete' && isset($_GET['id'])) {
+    controllerAdminCategory::categoryDelete($_GET['id']);
+}
+elseif ($path == 'profile') {
+    controllerAdmin::profileTable();
+}
+elseif ($path == 'profileEditResult') {
+    controllerAdmin::profileEditResult();
+}
+else {
+    controllerAdmin::error404();
+}
+?>
