@@ -1,0 +1,145 @@
+
+body {
+    background-color: #f5f5f5; 
+    color: #333;
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Noto Serif', serif;
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    flex: 1 0 auto;
+}
+
+.side-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: -1;
+    background-color: #ffffff; 
+    background-image: url('../img.adm/side-background.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.side-background.left {
+    left: 0;
+    background-position: left;
+}
+
+.side-background.right {
+    right: 0;
+    background-position: right;
+}
+
+.navbar {
+    background-color: #a61c2b !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    color: #ddd !important;
+}
+
+.navbar-logo {
+    height: 40px; 
+    width: auto;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+footer {
+    background-color: #f5f5f5 !important;
+    color: #333;
+    border-top: 1px solid #ddd;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+h1, h2, h3 {
+    color: #1a1a1a;
+}
+
+/* Стили для таблиц и форм в админке */
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    color: #333;
+}
+
+.form-control {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.form-control::placeholder {
+    color: #777;
+}
+
+.btn-primary {
+    background-color: #a61c2b !important;
+    border-color: #a61c2b !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: #8b1623 !important;
+    border-color: #8b1623 !important;
+}
+
+.btn-default {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #333;
+}
+
+.btn-default:hover {
+    background-color: #e5e5e5;
+    border-color: #ccc;
+}
+
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.alert-info {
+    background-color: #e7f3ff;
+    border-color: #b3d7ff;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+.navbar-nav .nav-link i {
+    font-size: 1.5rem; /* Увеличиваем размер иконки до 1.5rem */
+    line-height: 1; /* Убираем лишние отступы */
+}

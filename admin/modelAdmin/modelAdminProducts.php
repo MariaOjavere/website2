@@ -73,8 +73,11 @@ class modelAdminProducts {
             $picture = $_FILES['picture']['tmp_name'] ?? '';
             $stock = (int)($_POST['stock'] ?? 0);
             $price = (float)($_POST['price'] ?? 0);
+            $spec_names = $_POST['spec_name'] ?? [];
+            $spec_values = $_POST['spec_value'] ?? [];
 
             if ($name && $description && $category_id > 0 && $price >= 0) {
+                // Обновляем основные данные товара
                 $sql = "UPDATE products SET name = ?, description = ?, category_id = ?, stock = ?, price = ? WHERE id = ?";
                 $params = [$name, $description, $category_id, $stock, $price, $id];
 
@@ -87,7 +90,22 @@ class modelAdminProducts {
                 $db = new Database();
                 $stmt = $db->prepare($sql);
                 $result = $stmt->execute($params);
+
                 if ($result) {
+                    // Удаляем старые спецификации
+                    $db->executeRun("DELETE FROM product_specs WHERE product_id = ?", [$id]);
+
+                    // Добавляем новые спецификации
+                    if (!empty($spec_names) && count($spec_names) === count($spec_values)) {
+                        $sql = "INSERT INTO product_specs (product_id, spec_name, spec_value) VALUES (?, ?, ?)";
+                        $stmt = $db->prepare($sql);
+                        for ($i = 0; $i < count($spec_names); $i++) {
+                            if ($spec_names[$i] && $spec_values[$i]) {
+                                $stmt->execute([$id, $spec_names[$i], $spec_values[$i]]);
+                            }
+                        }
+                    }
+
                     $test = array(true, "Product updated successfully");
                 } else {
                     $test = array(false, "Failed to update product in database");
@@ -104,8 +122,11 @@ class modelAdminProducts {
         if ($id <= 0) {
             return false;
         }
-        $sql = 'DELETE FROM products WHERE id = ?';
         $db = new Database();
+        // Удаляем связанные спецификации перед удалением товара
+        $db->executeRun("DELETE FROM product_specs WHERE product_id = ?", [$id]);
+        // Удаляем товар
+        $sql = 'DELETE FROM products WHERE id = ?';
         $db->executeRun($sql, [$id]);
     }
 }

@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <!-- Боковые полосы -->
     <div class="side-background left"></div>
     <div class="side-background right"></div>
 
@@ -40,9 +39,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./">Avaleht</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="registerForm">Registreeru</a>
-                    </li>
+                    <?php if (isset($_SESSION['userId']) && isset($_SESSION['status']) && $_SESSION['status'] == 'admin'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin">Admin Panel</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <form class="d-flex" action="search">
                     <input class="form-control me-2" type="text" name="otsi" placeholder="Otsi..." aria-label="Search">
@@ -50,10 +51,24 @@
                         <i class="bi bi-search"></i> Otsi
                     </button>
                 </form>
+                <ul class="navbar-nav ms-3">
+    <?php if (isset($_SESSION['userId'])): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="logout" title="Logi välja">
+                <i class="bi bi-box-arrow-right" style="font-size: 1.5rem; line-height: 1;"></i>
+            </a>
+        </li>
+    <?php else: ?>
+        <li class="nav-item">
+            <a class="nav-link" href="loginForm" title="Logi sisse">
+                <i class="bi bi-person" style="font-size: 1.5rem; line-height: 1;"></i>
+            </a>
+        </li>
+    <?php endif; ?>
+</ul>
             </div>
         </div>
     </nav>
-
     <section>
         <div class="container my-5">
             <?php

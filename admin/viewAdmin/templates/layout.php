@@ -1,67 +1,81 @@
-<html>
+<!DOCTYPE html>
+<html lang="et">
 <head>
-<title>Dashboard</title>
-<link href="public/css/bootstrap.css" rel="stylesheet">
-<link href="public/css/mystyle.css" rel="stylesheet">
-<link rel="stylesheet" href="public/css/font-awesome.min.css">
-<script src="public/js/jquery.min.js"></script>
-<script src="public/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="public/js/ajaxupload.3.5.js"></script>	
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
 </head>
 <body>
-    <div class="container">  
-<?php
-if(isset($_SESSION['userId']) && isset($_SESSION['sessionID'])){
+    <div class="side-background left"></div>
+    <div class="side-background right"></div>
 
- ?>         
-			<div class="header clearfix">
-            <nav class="navbar navbar-default">
-			<div class="container-fluid">          
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../">
+                <img src="/img/logo.png" alt="Sign OÜ Logo" class="navbar-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Avaleht</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categoryAdmin">Tootekategooriad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="productsAdmin">Toodete loend</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <?php if (isset($_SESSION['userId']) && isset($_SESSION['sessionID'])): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout" title="Logi välja">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login" title="Logi sisse">
+                                <i class="bi bi-person"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <section>
+        <div class="container my-5">
+            <?php
+            if (isset($_SESSION['userId']) && isset($_SESSION['sessionID'])) {
+                if (isset($_SESSION["status"]) && $_SESSION["status"] == "admin") {
+                    if (isset($content)) {
+                        echo $content;
+                    } else {
+                        echo '<h1 class="text-center">Sisu puudub!</h1>';
+                    }
+                } else {
+                    echo '<h4 class="text-center">Sul pole õigusi!</h4>';
+                }
+            } else {
+                echo '<h4 class="text-center">Palun logi sisse.</h4>';
+            }
+            ?>
+        </div>
+    </section>
 
-	<?php
-	echo '<ul class="nav nav-pills pull-right"> ';
-	 echo '<li role="button">';	  
-	  echo '<a href="profile">User Profile <i class="fa fa-sign-out"></i></a></li>'; 
-	echo '<li role="button">'.$_SESSION["username"].
-		  '<a href="logout" style="display: inline;">
-		  Выйти 
-		  <i class="fa fa-sign-out"></i>
-		  </a>
-		  </li>
-		  </ul>';
-	
-if(isset($_SESSION["status"]) && $_SESSION["status"]=="admin"){	
-	
-			echo '<h4><a href="../" target=_blank>Web site Products portal</a>';
-			echo ' &#187 <a href="./" >Start admin</a>';
-			echo ' &#187 <a href="categoryAdmin">Product categories</a>';
-			echo ' &#187 <a href="productsAdmin">Products List</a>';
-			echo '</h4>';
-}else{
-	echo '<h4>У вас нет прав!</h4>';
-}
-	
-    ?>
-		</div>
-		</nav>
-		</div>		
-<?php
-}
-?>
+    <footer class="bg-light text-center py-3">
+        <p>SPTV21 2025 a. ©</p>
+    </footer>
 
-		<div id="content" style="padding-top:20px; ">
-		
-			<?php
-			if(isset($content)){
-			echo $content;
-			}			
-			
-			?>
-      </div>
-      <footer class="footer">
-        <p>&copy; 2019 Design Admin dashboard<i class="fa fa-child"></i></p>
-      </footer>
-    </div> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

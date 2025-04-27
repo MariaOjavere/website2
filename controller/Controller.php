@@ -75,8 +75,13 @@ class Controller {
         $register = new Register();
         $result = $register->registerUser();
         if ($result[0]) {
-            session_start();
-            $_SESSION['user'] = $_POST['name'];
+            $_SESSION['userId'] = $result[1]['id'];
+            $_SESSION['username'] = $result[1]['username'];
+            $_SESSION['status'] = $result[1]['status'];
+            $_SESSION['sessionID'] = session_id();
+            $_SESSION['email'] = $result[1]['email'];
+            $_SESSION['is_admin'] = ($result[1]['status'] === 'admin');
+            $_SESSION['user'] = $result[1]['username']; // Для совместимости
             header('Location: /');
             exit();
         }
@@ -104,12 +109,12 @@ class Controller {
                 $_SESSION['sessionID'] = session_id();
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['is_admin'] = ($user['status'] === 'admin');
-                $_SESSION['user'] = $user['username']; // Для совместимости с текущей логикой
+                $_SESSION['user'] = $user['username']; // Для совместимости
                 error_log("Login successful: userId = " . $user['id'] . ", status = " . $user['status']);
     
                 // Перенаправляем в зависимости от статуса
                 if ($user['status'] === 'admin') {
-                    header('Location: /admin/productsAdmin');
+                    header('Location: /admin'); // Перенаправляем на маршрут /admin
                     exit();
                 } else {
                     header('Location: /');
@@ -125,6 +130,16 @@ class Controller {
             $error = "Palun sisestage kasutajanimi ja parool!";
             include_once('view/answerLogin.php');
         }
+    }
+
+    public static function Logout() {
+        // Очищаем все сессионные переменные
+        $_SESSION = [];
+        // Уничтожаем сессию
+        session_destroy();
+        // Перенаправляем на главную страницу
+        header('Location: /');
+        exit();
     }
 }
 ?>
