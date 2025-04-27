@@ -12,12 +12,3 @@ include_once("controllerAdmin/controllerAdminCategory.php");
 
 include_once("routeAdmin/routingAdmin.php");
 ?>
-
-    <?php 
-    if (isset($content)) {
-        echo $content;
-    } else {
-        echo "<p>Error: Content not loaded.</p>";
-    }
-    ?>
-?>

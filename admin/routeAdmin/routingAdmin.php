@@ -6,7 +6,6 @@ $path = explode('/', $host)[$num];
 // Если пользователь уже авторизован и имеет права администратора
 if (isset($_SESSION['userId']) && isset($_SESSION['sessionID']) && isset($_SESSION['status']) && $_SESSION['status'] == 'admin') {
     if ($path == '' || $path == 'index' || $path == 'index.php') {
-        // Перенаправляем сразу на список товаров
         header('Location: /admin/productsAdmin');
         exit();
     }
@@ -37,19 +36,19 @@ if (isset($_SESSION['userId']) && isset($_SESSION['sessionID']) && isset($_SESSI
     elseif ($path == 'categoryAdmin') {
         controllerAdminCategory::categoryList();
     }
-    elseif ($path == 'categoryAdd') {
+    elseif ($path == 'categoryAdd') { // Исправлено: categoryAddForm → categoryAdd
         controllerAdminCategory::categoryAdd();
     }
     elseif ($path == 'categoryAddResult') {
         controllerAdminCategory::categoryAddResult();
     }
-    elseif ($path == 'categoryEdit' && isset($_GET['id'])) {
+    elseif ($path == 'categoryEdit' && isset($_GET['id'])) { // Исправлено: categoryEditForm → categoryEdit
         controllerAdminCategory::categoryEdit($_GET['id']);
     }
     elseif ($path == 'categoryEditResult' && isset($_GET['id'])) {
         controllerAdminCategory::categoryEditResult($_GET['id']);
     }
-    elseif ($path == 'categoryDelete' && isset($_GET['id'])) {
+    elseif ($path == 'categoryDelete' && isset($_GET['id'])) { // Исправлено: categoryDeleteForm → categoryDelete
         controllerAdminCategory::categoryDelete($_GET['id']);
     }
     elseif ($path == 'profile') {
@@ -59,12 +58,10 @@ if (isset($_SESSION['userId']) && isset($_SESSION['sessionID']) && isset($_SESSI
         controllerAdmin::profileEditResult();
     }
     else {
-        // Если маршрут не найден, перенаправляем на главную страницу публичной части
-        header('Location: /');
+        header('Location: /admin'); // Изменено: / → /admin
         exit();
     }
 } else {
-    // Если пользователь не авторизован или не администратор, показываем страницу логина
     if ($path == 'login') {
         controllerAdmin::loginAction();
     } else {

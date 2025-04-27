@@ -47,16 +47,18 @@
                             $imageSrc = "/images/placeholder.jpg";
                         }
                         ?>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="<?php echo htmlspecialchars($imageSrc); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($value['name'] ?? 'Product'); ?>">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($value['name'] ?? 'No Name'); ?></h5>
-                                    <p class="card-text"><strong>Hind:</strong> <?php echo htmlspecialchars($value['price'] ?? '0'); ?> €</p>
-                                    <a href="product?id=<?php echo htmlspecialchars($value['id'] ?? ''); ?>" class="btn btn-primary">Vaata lähemalt</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+    <div class="card">
+        <img src="<?php echo htmlspecialchars($imageSrc); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($value['name'] ?? 'Product'); ?>">
+        <div class="card-body">
+            <h5 class="card-title"><?php echo htmlspecialchars($value['name'] ?? 'No Name'); ?></h5>
+            <!-- Добавляем описание -->
+            <p class="card-text description"><?php echo htmlspecialchars($value['description'] ?? 'Kirjeldus puudub'); ?></p>
+            <p class="card-text price"><strong>Hind:</strong> <?php echo htmlspecialchars($value['price'] ?? '0'); ?> €</p>
+            <a href="product?id=<?php echo htmlspecialchars($value['id'] ?? ''); ?>" class="btn btn-primary">Vaata lähemalt</a>
+        </div>
+    </div>
+</div>
                         <?php
                     }
                     ?>

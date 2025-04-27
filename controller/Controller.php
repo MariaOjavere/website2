@@ -25,6 +25,12 @@ class Controller {
     
     public static function ProductsByCatID($id) {
         $arr = Products::getProductsByCategoryID($id);
+        $category = Category::getCategoryById($id);
+        if (!$category) {
+            self::error404();
+            return;
+        }
+        $categoryName = htmlspecialchars($category['name']);
         include_once 'view/catproducts.php';
     }
     

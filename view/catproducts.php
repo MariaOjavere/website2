@@ -1,11 +1,11 @@
 <?php
 ob_start();
 ?>
-<h1>Tooted</h1>
+<h1><?php echo $categoryName; ?></h1>
 <br>
 
 <?php
-echo ViewProducts::ProductsByCategory($arr); // Добавляем echo для вывода результата
+echo ViewProducts::ProductsByCategory($arr);
 $content = ob_get_clean();
 include_once 'view/layout.php';
 ?>

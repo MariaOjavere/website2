@@ -1,15 +1,15 @@
 <?php
-class Category{
-	
-
+class Category {
     public static function getAllCategory() {
-        $query = "SELECT * FROM category" ;
+        $sql = "SELECT * FROM category ORDER BY name";
         $db = new Database();
-        $arr = $db->getAll($query);
-        return $arr;
+        return $db->getAll($sql);
     }
 
-//добавить еще методы по работе с категориями
-
-	
+    // Добавим метод для получения категории по ID
+    public static function getCategoryById($id) {
+        $sql = "SELECT * FROM category WHERE id = ?";
+        $db = new Database();
+        return $db->getOne($sql, [$id]);
+    }
 }

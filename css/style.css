@@ -271,9 +271,9 @@ section {
 }
 
 .card-title {
-    color: #1a1a1a;
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold; /* Делаем текст жирным */
 }
 
 .card-text {
@@ -304,4 +304,57 @@ footer {
 
 h1, h2, h3 {
     color: #1a1a1a;
+}
+/* Контейнер карточки */
+.card {
+    min-height: 450px; /* Минимальная высота карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Изображение в карточке */
+.card-img-top {
+    height: 200px; /* Фиксированная высота изображения */
+    object-fit: contain;
+    padding: 10px;
+}
+
+/* Тело карточки */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Название продукта */
+.card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Описание продукта */
+.card-text.description {
+    font-size: 0.9rem;
+    max-height: 80px; /* Ограничиваем высоту описания */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Ограничиваем описание до 3 строк */
+    line-clamp: 3; /* Standard property for compatibility */
+    -webkit-box-orient: vertical;
+    margin-bottom: 0.5rem;
+}
+
+/* Цена */
+.card-text.price {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Кнопка */
+.card-body .btn {
+    margin-top: auto; /* Кнопка всегда внизу */
 }

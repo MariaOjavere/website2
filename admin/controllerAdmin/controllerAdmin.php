@@ -6,7 +6,9 @@ class controllerAdmin{
     }
 
     public static function formLoginSite(){
-        include_once "viewAdmin/formLogin.php";
+        // Перенаправляем на главную страницу
+        header('Location: /');
+        exit();
     }
 
     public static function loginAction(){
@@ -17,7 +19,9 @@ class controllerAdmin{
             exit();
         } else {
             $_SESSION['errorString'] = 'Vale e-posti aadress või parool';
-            include_once "viewAdmin/formLogin.php";
+            // Перенаправляем на главную страницу
+            header('Location: /');
+            exit();
         }
     }
 
@@ -36,11 +40,3 @@ class controllerAdmin{
     }
 }
 ?>
-
-
-
-
-
-
-
-
