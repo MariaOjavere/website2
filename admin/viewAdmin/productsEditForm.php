@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <div class="container" style="min-height:400px;">
 <div class="col-md-11">    
-    <h2>Products Edit</h2>
+    <h2>Tooted Redigeeri</h2>
     <?php if (isset($_SESSION['errorString'])): ?>
         <div class="alert alert-danger">
             <?php echo htmlspecialchars($_SESSION['errorString']); ?>
@@ -11,15 +11,15 @@
     
     <form method="post" action="/admin/productsEditResult?id=<?php echo htmlspecialchars($product['id']); ?>" enctype="multipart/form-data">
         <div class="form-group">
-            <label>Products Name</label>
+            <label>Toote nimi</label>
             <input type="text" name="name" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
         </div>
         <div class="form-group">
-            <label>Products Description</label>
+            <label>Toodete kirjeldus</label>
             <textarea name="description" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
         </div>
         <div class="form-group">
-            <label>Category</label>
+            <label>Kategooria</label>
             <select name="category_id" class="form-control">
                 <?php
                 foreach($arr as $row) {
@@ -30,20 +30,20 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Picture</label>
+            <label>Pilt</label>
             <input type="file" name="picture" class="form-control">
-            <p>Current picture: <?php echo $product['picture'] ? '(Image exists)' : 'None'; ?></p>
+            <p>Praegune pilt: <?php echo $product['picture'] ? '(Image exists)' : 'None'; ?></p>
         </div>
         <div class="form-group">
-            <label>Stock</label>
+            <label>Laos</label>
             <input type="number" name="stock" class="form-control" value="<?php echo htmlspecialchars($product['stock']); ?>" required>
         </div>
         <div class="form-group">
-            <label>Price</label>
+            <label>Hind</label>
             <input type="number" name="price" class="form-control" step="0.01" min="0" value="<?php echo htmlspecialchars($product['price']); ?>" required>
         </div>
         <div class="form-group">
-            <label>Specifications</label>
+            <label>Tehnilised andmed</label>
             <div id="specifications">
                 <?php
                 $db = new Database();
@@ -65,10 +65,10 @@
                 }
                 ?>
             </div>
-            <button type="button" id="add-spec" class="btn btn-secondary">Add Specification</button>
+            <button type="button" id="add-spec" class="btn btn-secondary">Lisa andme</button>
         </div>
-        <button type="submit" name="btnEditProduct" class="btn btn-primary">Save</button>
-        <a href="/admin/productsAdmin" class="btn btn-default">Back to List</a>
+        <button type="submit" name="btnEditProduct" class="btn btn-primary">Salvesta</button>
+        <a href="/admin/productsAdmin" class="btn btn-default">Tagasi nimekirja</a>
     </form>
 </div>
 </div>

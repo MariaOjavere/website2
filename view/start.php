@@ -14,15 +14,15 @@
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Eelmine</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Edasi</span>
     </button>
 </div>
 
-<h1 class="text-center mb-4">Populaarsed Tooted</h1>
+<h1 class="text-center mb-4">Populariseeritud Tooted</h1>
 <div id="productsCarousel" class="carousel slide">
     <div class="carousel-inner">
         <?php
@@ -52,7 +52,6 @@
         <img src="<?php echo htmlspecialchars($imageSrc); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($value['name'] ?? 'Product'); ?>">
         <div class="card-body">
             <h5 class="card-title"><?php echo htmlspecialchars($value['name'] ?? 'No Name'); ?></h5>
-            <!-- Добавляем описание -->
             <p class="card-text description"><?php echo htmlspecialchars($value['description'] ?? 'Kirjeldus puudub'); ?></p>
             <p class="card-text price"><strong>Hind:</strong> <?php echo htmlspecialchars($value['price'] ?? '0'); ?> €</p>
             <a href="product?id=<?php echo htmlspecialchars($value['id'] ?? ''); ?>" class="btn btn-primary">Vaata lähemalt</a>
@@ -70,10 +69,10 @@
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#productsCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Eelmine</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#productsCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Edasi</span>
     </button>
 </div>

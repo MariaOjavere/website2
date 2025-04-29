@@ -1,7 +1,14 @@
 <?php
 class controllerAdminProducts {
     public static function productsList() {
-        $arr = modelAdminProducts::getProductsList();
+        $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+        if ($search) {
+            $arr = modelAdminProducts::searchProducts($search);
+        } else {
+            $arr = modelAdminProducts::getProductsList();
+        }
+        
         include_once dirname(__DIR__) . '/viewAdmin/productsList.php';
     }
 
@@ -33,7 +40,7 @@ class controllerAdminProducts {
             header('Location: /admin/productsAdmin');
             exit();
         }
-        $arr = controllerAdminCategory::getCategoryList(); // Загружаем список категорий для формы
+        $arr = controllerAdminCategory::getCategoryList();
         include_once dirname(__DIR__) . '/viewAdmin/productsEditForm.php';
     }
 
@@ -49,8 +56,8 @@ class controllerAdminProducts {
             exit();
         } else {
             $_SESSION['errorString'] = $test[1];
-            $product = modelAdminProducts::getProductEdit($id); // Загружаем данные товара для формы
-            $arr = controllerAdminCategory::getCategoryList(); // Загружаем список категорий
+            $product = modelAdminProducts::getProductEdit($id);
+            $arr = controllerAdminCategory::getCategoryList();
             include_once dirname(__DIR__) . '/viewAdmin/productsEditForm.php';
         }
     }

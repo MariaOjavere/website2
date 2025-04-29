@@ -74,7 +74,6 @@ h1, h2, h3 {
     color: #1a1a1a;
 }
 
-/* Стили для таблиц и форм в админке */
 .table {
     background-color: #fff;
     border-radius: 8px;
@@ -138,8 +137,4 @@ h1, h2, h3 {
     background-color: #f8d7da;
     border-color: #f5c6cb;
     color: #721c24;
-}
-.navbar-nav .nav-link i {
-    font-size: 1.5rem; /* Увеличиваем размер иконки до 1.5rem */
-    line-height: 1; /* Убираем лишние отступы */
 }

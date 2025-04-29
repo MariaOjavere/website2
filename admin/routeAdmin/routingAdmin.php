@@ -3,7 +3,6 @@ $host = explode('?', $_SERVER['REQUEST_URI'])[0];
 $num = substr_count($host, '/');
 $path = explode('/', $host)[$num];
 
-// Если пользователь уже авторизован и имеет права администратора
 if (isset($_SESSION['userId']) && isset($_SESSION['sessionID']) && isset($_SESSION['status']) && $_SESSION['status'] == 'admin') {
     if ($path == '' || $path == 'index' || $path == 'index.php') {
         header('Location: /admin/productsAdmin');
@@ -36,19 +35,19 @@ if (isset($_SESSION['userId']) && isset($_SESSION['sessionID']) && isset($_SESSI
     elseif ($path == 'categoryAdmin') {
         controllerAdminCategory::categoryList();
     }
-    elseif ($path == 'categoryAdd') { // Исправлено: categoryAddForm → categoryAdd
+    elseif ($path == 'categoryAdd') { 
         controllerAdminCategory::categoryAdd();
     }
     elseif ($path == 'categoryAddResult') {
         controllerAdminCategory::categoryAddResult();
     }
-    elseif ($path == 'categoryEdit' && isset($_GET['id'])) { // Исправлено: categoryEditForm → categoryEdit
+    elseif ($path == 'categoryEdit' && isset($_GET['id'])) {
         controllerAdminCategory::categoryEdit($_GET['id']);
     }
     elseif ($path == 'categoryEditResult' && isset($_GET['id'])) {
         controllerAdminCategory::categoryEditResult($_GET['id']);
     }
-    elseif ($path == 'categoryDelete' && isset($_GET['id'])) { // Исправлено: categoryDeleteForm → categoryDelete
+    elseif ($path == 'categoryDelete' && isset($_GET['id'])) { 
         controllerAdminCategory::categoryDelete($_GET['id']);
     }
     elseif ($path == 'profile') {
@@ -58,7 +57,7 @@ if (isset($_SESSION['userId']) && isset($_SESSION['sessionID']) && isset($_SESSI
         controllerAdmin::profileEditResult();
     }
     else {
-        header('Location: /admin'); // Изменено: / → /admin
+        header('Location: /admin'); 
         exit();
     }
 } else {

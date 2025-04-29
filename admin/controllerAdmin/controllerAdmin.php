@@ -6,7 +6,6 @@ class controllerAdmin{
     }
 
     public static function formLoginSite(){
-        // Перенаправляем на главную страницу
         header('Location: /');
         exit();
     }
@@ -19,7 +18,6 @@ class controllerAdmin{
             exit();
         } else {
             $_SESSION['errorString'] = 'Vale e-posti aadress või parool';
-            // Перенаправляем на главную страницу
             header('Location: /');
             exit();
         }

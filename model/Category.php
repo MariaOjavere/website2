@@ -6,7 +6,6 @@ class Category {
         return $db->getAll($sql);
     }
 
-    // Добавим метод для получения категории по ID
     public static function getCategoryById($id) {
         $sql = "SELECT * FROM category WHERE id = ?";
         $db = new Database();

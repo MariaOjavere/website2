@@ -1,17 +1,17 @@
 <?php ob_start(); ?>
 <div class="container" style="min-height:400px;">
 <div class="col-md-11">    
-    <h2>Products List</h2>
+    <h2>Toodete loend</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Specifications</th>
-                <th>Actions</th>
+                <th>Nimi</th>
+                <th>Kirjeldus</th>
+                <th>Kategooria</th>
+                <th>Hind</th>
+                <th>Laos</th>
+                <th>Tehnilised andmed</th>
+                <th>Tegevused</th>
             </tr>
         </thead>
         <tbody>
@@ -38,14 +38,14 @@
                         ?>
                     </td>
                     <td>
-                        <a href="productsEdit?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
-                        <a href="productsDelete?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
+                        <a href="productsEdit?id=<?php echo $row['id']; ?>" class="btn btn-primary">Muuda</a>
+                        <a href="productsDelete?id=<?php echo $row['id']; ?>" class="btn btn-danger">Kustuta</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="productsAdd" class="btn btn-success">Add Product</a>
+    <a href="productsAdd" class="btn btn-success">Lisa toode</a>
 </div>
 </div>
 <?php $content = ob_get_clean(); ?>

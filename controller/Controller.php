@@ -87,7 +87,7 @@ class Controller {
             $_SESSION['sessionID'] = session_id();
             $_SESSION['email'] = $result[1]['email'];
             $_SESSION['is_admin'] = ($result[1]['status'] === 'admin');
-            $_SESSION['user'] = $result[1]['username']; // Для совместимости
+            $_SESSION['user'] = $result[1]['username']; 
             header('Location: /');
             exit();
         }
@@ -115,12 +115,11 @@ class Controller {
                 $_SESSION['sessionID'] = session_id();
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['is_admin'] = ($user['status'] === 'admin');
-                $_SESSION['user'] = $user['username']; // Для совместимости
+                $_SESSION['user'] = $user['username']; 
                 error_log("Login successful: userId = " . $user['id'] . ", status = " . $user['status']);
-    
-                // Перенаправляем в зависимости от статуса
+
                 if ($user['status'] === 'admin') {
-                    header('Location: /admin'); // Перенаправляем на маршрут /admin
+                    header('Location: /admin'); 
                     exit();
                 } else {
                     header('Location: /');
@@ -139,11 +138,8 @@ class Controller {
     }
 
     public static function Logout() {
-        // Очищаем все сессионные переменные
         $_SESSION = [];
-        // Уничтожаем сессию
         session_destroy();
-        // Перенаправляем на главную страницу
         header('Location: /');
         exit();
     }

@@ -1,8 +1,8 @@
 <?php ob_start(); ?>
-<h2>Админ панель </h2>
+<h2>Administraatori paneel</h2>
 <article>
 
-<p>Админ панель </p>
+<p>Administraatori paneel </p>
 
 
 </article>

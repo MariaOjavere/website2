@@ -2,14 +2,14 @@
  
 <div class="container" style="min-height:400px;">
 <div class="col-md-11">	 
- <h2>Products delete </h2>
+ <h2>Tooted kustutada</h2>
  <?php 
  if(isset($test)){
 	if($test==true)
 		{
 ?>
 	<div class="alert alert-info">
-		<strong>Запись удалена. </strong><a href="productsAdmin"> Список продуктов</a>
+		<strong>Kirje on kustutatud.</strong><a href="productsAdmin"> Toodete loetelu</a>
 	</div>
 	<?php
 		}
@@ -17,7 +17,7 @@
     {
      ?>
 		<div class="alert alert-warning">
-			<strong>Ошибка удаления записи!</strong> <a href="productsAdmin"> Список продуктов</a>
+			<strong>Viga kirje kustutamisel!</strong> <a href="productsAdmin"> Toodete loetelu</a>
 		</div>
      <?php
         }	
@@ -27,15 +27,15 @@
   <form method='POST' action="productsDelResult?id=<?php echo $id; ?>" enctype="multipart/form-data">
     <table class='table table-bordered'>
         <tr>
-            <td>Products title</td>
+            <td>Toodete pealkiri</td>
             <td><input type='text' name='title' class='form-control' required value=<?php  echo $detail['title']; ?> readonly></td>
         </tr>
         <tr>
-            <td>Products text</td>
+            <td>Toodete tekst</td>
             <td><textarea rows="5" name="text" class='form-control' required readonly><?php  echo $detail['text']; ?></textarea></td>
         </tr>
 		<tr>
-            <td>Category</td>
+            <td>Kategooria</td>
             <td>
 			    <select name="idCategory" class="form-control" disabled>
                     <?php
@@ -60,10 +60,10 @@
         <tr>
             <td colspan="2">
                 <button type="submit" class="btn btn-primary" name="save">
-                    <span class="glyphicon glyphicon-plus"></span> Удалить
+                    <span class="glyphicon glyphicon-plus"></span> Kustuta
                 </button>  
                 <a href="productsAdmin" class="btn btn-large btn-success">
-                <i class="glyphicon glyphicon-backward"></i> &nbsp;Назад к списку</a>
+                <i class="glyphicon glyphicon-backward"></i> &nbsp;Tagasi nimekirja</a>
             </td>
         </tr>
     </table>

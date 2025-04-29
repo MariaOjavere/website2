@@ -23,7 +23,6 @@ class Register {
             $errorString .= "Paroolid ei ühti<br />";
         }
 
-        // Проверка на существующий email
         if (mb_strlen($errorString) === 0) {
             $db = new Database();
             $sql = "SELECT COUNT(*) FROM users WHERE email = :email";

@@ -1,10 +1,6 @@
 <?php
-
-echo "<li class='submenuunit'><a href='all'>ALL</a></li><br>";
-foreach($arr as $value){
-    echo "<li class='submenuunit'><a href='category?id=".$value['id']."'>".$value['name'].'</a></li><br>';
+echo '<li><a class="dropdown-item" href="/all">Kõik tooted</a></li>';
+foreach ($arr as $row) {
+    echo '<li><a class="dropdown-item" href="category?id=' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['name']) . '</a></li>';
 }
-
-
-
 ?>

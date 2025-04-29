@@ -1,16 +1,16 @@
 <?php ob_start() ?>
 
-<h2>Category List</h2>
+<h2>Kategooriate loend</h2>
 
 <div class="container" style="min-height:400px;">
     <div style="margin:20px;">
-        <a class="btn btn-primary" href="categoryAdd" role="button">Добавить категорию</a>
+        <a class="btn btn-primary" href="categoryAdd" role="button">Lisa kategooria</a>
     </div>
     <div class="col-md-11">        
         <table class='table table-bordered table-responsive'>
             <tr>
                 <th width="10%">ID</th>
-                <th width="70%">Header Category</th>
+                <th width="70%">Päise kategooria</th>
                 <th width="20%"></th>
             </tr>
             <?php

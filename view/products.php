@@ -25,17 +25,20 @@ class ViewProducts {
     public static function AllProducts($arr) {
         $output = '<div class="row">';
         foreach ($arr as $value) {
-            $output .= '<div class="col-md-4 mb-4">';
-            $output .= '<div class="card h-100">';
-            if (!empty($value['picture'])) {
-                $output .= '<img src="data:image/jpeg;base64,' . base64_encode($value['picture']) . '" class="card-img-top" alt="' . htmlspecialchars($value['name']) . '">';
-            }
-            $output .= '<div class="card-body d-flex flex-column">';
-            $output .= '<h5 class="card-title">' . htmlspecialchars($value['name']) . '</h5>';
-            $output .= '<a href="product?id=' . $value['id'] . '" class="btn btn-primary mt-auto">Vaata lähemalt</a>';
-            $output .= '</div>';
-            $output .= '</div>';
-            $output .= '</div>';
+            $output .= '
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        ' . ($value['picture'] ? 
+                            '<img src="data:image/jpeg;base64,' . base64_encode($value['picture']) . '" class="card-img-top" alt="' . htmlspecialchars($value['name']) . '">' :
+                            '<img src="/img/placeholder.jpg" class="card-img-top" alt="No image">') . '
+                        <div class="card-body">
+                            <h5 class="card-title">' . htmlspecialchars($value['name']) . '</h5>
+                            <p class="card-text description">' . htmlspecialchars($value['description']) . '</p>
+                            <p class="card-text price"><strong>Hind:</strong> ' . htmlspecialchars($value['price']) . ' €</p>
+                            <a href="product?id=' . htmlspecialchars($value['id']) . '" class="btn btn-primary">Vaata lähemalt</a>
+                        </div>
+                    </div>
+                </div>';
         }
         $output .= '</div>';
         return $output;
@@ -94,4 +97,3 @@ class ViewProducts {
         return $output;
     }
 }
-?>

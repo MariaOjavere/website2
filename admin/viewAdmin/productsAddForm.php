@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <div class="container" style="min-height:400px;">
 <div class="col-md-11">    
-    <h2>Products Add</h2>
+    <h2>Tooted Lisa</h2>
     <?php if (isset($_SESSION['errorString'])): ?>
         <div class="alert alert-danger">
             <?php echo htmlspecialchars($_SESSION['errorString']); ?>
@@ -11,15 +11,15 @@
     
     <form method="post" action="productsAddResult" enctype="multipart/form-data">
         <div class="form-group">
-            <label>Products Name</label>
+            <label>Toote nimi</label>
             <input type="text" name="name" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Products Description</label>
+            <label>Toodete kirjeldus</label>
             <textarea name="description" class="form-control" required></textarea>
         </div>
         <div class="form-group">
-            <label>Category</label>
+            <label>Kategooria</label>
             <select name="category_id" class="form-control">
                 <?php
                 foreach($arr as $row) {
@@ -29,30 +29,30 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Picture</label>
+            <label>Pilt</label>
             <input type="file" name="picture" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Stock</label>
+            <label>Laos</label>
             <input type="number" name="stock" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Price</label>
+            <label>Hind</label>
             <input type="number" name="price" class="form-control" step="0.01" min="0" required>
         </div>
         <div class="form-group">
-            <label>Specifications</label>
+            <label>Tehnilised andmed</label>
             <div id="specifications">
                 <div class="spec-row">
                     <input type="text" name="spec_name[]" placeholder="Spec Name (e.g., Printimise tüüp)" class="form-control" style="display:inline-block; width:40%;">
                     <input type="text" name="spec_value[]" placeholder="Spec Value (e.g., Laser)" class="form-control" style="display:inline-block; width:40%;">
-                    <button type="button" class="btn btn-danger remove-spec">Remove</button>
+                    <button type="button" class="btn btn-danger remove-spec">Eemalda</button>
                 </div>
             </div>
-            <button type="button" id="add-spec" class="btn btn-secondary">Add Specification</button>
+            <button type="button" id="add-spec" class="btn btn-secondary">Lisa andme</button>
         </div>
-        <button type="submit" name="btnAddProduct" class="btn btn-primary">Save</button>
-        <a href="productsAdmin" class="btn btn-default">Back to List</a>
+        <button type="submit" name="btnAddProduct" class="btn btn-primary">Salvestada</button>
+        <a href="productsAdmin" class="btn btn-default">Tagasi nimekirja</a>
     </form>
 </div>
 </div>

@@ -30,12 +30,10 @@ if ($path == '' || $path == 'index' || $path == 'index.php') {
 } elseif ($path == 'info') { 
     $response = Controller::InfoPage();
 } elseif ($path == 'admin') {
-    // Проверяем, авторизован ли пользователь и имеет ли права администратора
     if (isset($_SESSION['userId']) && isset($_SESSION['status']) && $_SESSION['status'] == 'admin') {
-        header('Location: admin/'); // Перенаправляем в админ-панель
+        header('Location: admin/'); 
         exit();
     } else {
-        // Если нет прав или не авторизован, перенаправляем на страницу логина
         header('Location: loginForm');
         exit();
     }

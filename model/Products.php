@@ -27,7 +27,6 @@ class Products {
         $db = new Database();
         $p = $db->getOne($query);
         if ($p) {
-            // Добавляем характеристики товара
             $p['specs'] = self::getProductSpecs($id);
         }
         return $p;
@@ -40,7 +39,6 @@ class Products {
         return $p;
     }
 
-    // Новый метод для получения характеристик товара
     public static function getProductSpecs($productId) {
         $query = "SELECT spec_name, spec_value FROM product_specs WHERE product_id=" . (string)$productId;
         $db = new Database();

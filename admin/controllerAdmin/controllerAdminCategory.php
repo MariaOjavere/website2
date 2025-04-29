@@ -19,7 +19,7 @@ if (!class_exists('controllerAdminCategory')) {
         public static function categoryAddResult() {
             $test = modelAdminCategory::getCategoryAdd();
             if ($test[0]) {
-                $_SESSION['successString'] = 'Kategooria lisatud edukalt!'; // Сообщение об успехе
+                $_SESSION['successString'] = 'Kategooria lisatud edukalt!';
                 header('Location: /admin/categoryAdmin');
                 exit();
             } else {
@@ -36,7 +36,7 @@ if (!class_exists('controllerAdminCategory')) {
         public static function categoryEditResult($id) {
             $test = modelAdminCategory::getCategoryEditResult($id);
             if ($test[0]) {
-                $_SESSION['successString'] = 'Kategooria muudetud edukalt!'; // Сообщение об успехе
+                $_SESSION['successString'] = 'Kategooria muudetud edukalt!';
                 header('Location: /admin/categoryAdmin');
                 exit();
             } else {
@@ -47,7 +47,7 @@ if (!class_exists('controllerAdminCategory')) {
 
         public static function categoryDelete($id) {
             modelAdminCategory::getCategoryDelete($id);
-            $_SESSION['successString'] = 'Kategooria kustutatud edukalt!'; // Сообщение об успехе
+            $_SESSION['successString'] = 'Kategooria kustutatud edukalt!'; 
             header('Location: /admin/categoryAdmin');
             exit();
         }
