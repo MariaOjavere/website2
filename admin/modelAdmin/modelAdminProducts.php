@@ -9,6 +9,17 @@ class modelAdminProducts {
         return $db->getAll($sql);
     }
 
+    public static function searchProducts($search) {
+        $sql = 'SELECT products.*, category.name AS category_name 
+                FROM products 
+                LEFT JOIN category ON products.category_id = category.id 
+                WHERE products.name LIKE ? OR products.description LIKE ? 
+                ORDER BY products.id DESC';
+        $db = new Database();
+        $searchTerm = '%' . $search . '%';
+        return $db->getAll($sql, [$searchTerm, $searchTerm]);
+    }
+
     public static function getProductsAdd() {
         $test = array(false, "Error adding product");
         if (isset($_POST['btnAddProduct'])) {
@@ -43,12 +54,12 @@ class modelAdminProducts {
                         }
                     }
 
-                    $test = array(true, "Product added successfully");
+                    $test = array(true, "Toode edukalt lisatud");
                 } else {
-                    $test = array(false, "Failed to add product to database");
+                    $test = array(false, "Toote lisamine andmebaasi nurjus");
                 }
             } else {
-                $test = array(false, "All fields are required, including price");
+                $test = array(false, "Kõik väljad on kohustuslikud, sealhulgas hind");
             }
         }
         return $test;
@@ -77,7 +88,6 @@ class modelAdminProducts {
             $spec_values = $_POST['spec_value'] ?? [];
 
             if ($name && $description && $category_id > 0 && $price >= 0) {
-                // Обновляем основные данные товара
                 $sql = "UPDATE products SET name = ?, description = ?, category_id = ?, stock = ?, price = ? WHERE id = ?";
                 $params = [$name, $description, $category_id, $stock, $price, $id];
 
@@ -92,10 +102,7 @@ class modelAdminProducts {
                 $result = $stmt->execute($params);
 
                 if ($result) {
-                    // Удаляем старые спецификации
                     $db->executeRun("DELETE FROM product_specs WHERE product_id = ?", [$id]);
-
-                    // Добавляем новые спецификации
                     if (!empty($spec_names) && count($spec_names) === count($spec_values)) {
                         $sql = "INSERT INTO product_specs (product_id, spec_name, spec_value) VALUES (?, ?, ?)";
                         $stmt = $db->prepare($sql);
@@ -106,28 +113,27 @@ class modelAdminProducts {
                         }
                     }
 
-                    $test = array(true, "Product updated successfully");
+                    $test = array(true, "Toode edukalt lisatud");
                 } else {
-                    $test = array(false, "Failed to update product in database");
+                    $test = array(false, "Toote värskendamine andmebaasis ebaõnnestus");
                 }
             } else {
-                $test = array(false, "All fields are required, including a valid category and price");
+                $test = array(false, "Kõik väljad on kohustuslikud, sealhulgas kehtiv kategooria ja hind");
             }
         }
         return $test;
     }
 
     public static function getProductDelete($id) {
-        $id = (int)$id;
-        if ($id <= 0) {
+        $db = new Database();
+        try {
+            $db->executeRun("DELETE FROM reviews WHERE product_id = ?", [$id]);
+            $db->executeRun("DELETE FROM products WHERE id = ?", [$id]);
+            return true;
+        } catch (PDOException $e) {
+            error_log("Viga toote kustutamisel: " . $e->getMessage());
             return false;
         }
-        $db = new Database();
-        // Удаляем связанные спецификации перед удалением товара
-        $db->executeRun("DELETE FROM product_specs WHERE product_id = ?", [$id]);
-        // Удаляем товар
-        $sql = 'DELETE FROM products WHERE id = ?';
-        $db->executeRun($sql, [$id]);
     }
 }
 ?>
