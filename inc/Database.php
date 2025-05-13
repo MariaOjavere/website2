@@ -7,10 +7,18 @@ class Database {
     private $baseName;
 
     function __construct() {
-        $this->host = 'localhost';
-        $this->user = 'root';
-        $this->password = '';
-        $this->baseName = 'signoudb';
+        if (getenv('JAWSDB_URL')) {
+            $url = parse_url(getenv('JAWSDB_URL'));
+            $this->host = $url['host'];
+            $this->user = $url['user'];
+            $this->password = $url['pass'];
+            $this->baseName = substr($url['path'], 1);
+        } else {
+            $this->host = 'localhost';
+            $this->user = 'root';
+            $this->password = '';
+            $this->baseName = 'signoudb';
+        }
         $this->connect();
     }
 
@@ -21,14 +29,14 @@ class Database {
     function connect() {
         try {
             $this->conn = new PDO(
-                'mysql:host='.$this->host.';dbname='.$this->baseName.'',
-                $this->user, 
-                $this->password, 
+                'mysql:host=' . $this->host . ';dbname=' . $this->baseName,
+                $this->user,
+                $this->password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')
             );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
-            die('Connection failed : '.$e->getMessage());
+            die('Connection failed: ' . $e->getMessage());
         }
         return $this->conn;
     }
