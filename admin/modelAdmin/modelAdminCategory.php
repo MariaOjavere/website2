@@ -7,7 +7,7 @@ class modelAdminCategory {
     }
 
     public static function getCategoryAdd() {
-        $test = array(false, "Error adding category");
+        $test = array(false, "Viga kategooria lisamisel");
         if (isset($_POST['btnAddCategory'])) {
             $name = $_POST['name'] ?? '';
             if ($name) {
@@ -16,7 +16,7 @@ class modelAdminCategory {
                 $stmt = $db->prepare($sql);
                 $result = $stmt->execute([$name]);
                 if ($result) {
-                    $test = array(true, "Category added successfully");
+                    $test = array(true, "Kategooria lisamine õnnestus");
                 }
             }
         }
@@ -30,7 +30,7 @@ class modelAdminCategory {
     }
 
     public static function getCategoryEditResult($id) {
-        $test = array(false, "Error editing category");
+        $test = array(false, "Viga kategooria lisamisel");
         if (isset($_POST['btnEditCategory'])) {
             $name = $_POST['name'] ?? '';
             if ($name) {
@@ -39,7 +39,7 @@ class modelAdminCategory {
                 $stmt = $db->prepare($sql);
                 $result = $stmt->execute([$name, $id]);
                 if ($result) {
-                    $test = array(true, "Category updated successfully");
+                    $test = array(true, "Kategooria lisamine õnnestus");
                 }
             }
         }
