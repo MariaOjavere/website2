@@ -1,5 +1,16 @@
 {
     "require": {
+        "php": ">=7.4",
         "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/model/Database.php",
+            "app/model/Register.php",
+            "app/model/Products.php"
+        ]
     }
 }
