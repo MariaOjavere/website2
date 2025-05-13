@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('config.php');
+require_once('../inc/Database.php');
 
 include_once("modelAdmin/modelAdmin.php");
 include_once("modelAdmin/modelAdminProducts.php");

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include 'config.php';
+include_once 'inc/Database.php';
 require 'model/Category.php';
 require 'model/Products.php';
 require 'model/Reviews.php';
